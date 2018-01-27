@@ -83,6 +83,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sc: {fileID: 0}
   color: {r: 0, g: 0, b: 0, a: 1}
+  lost: 0
+  exploded: 0
+  explodeSprite: {fileID: 0}
   range: 10
   rayWidth: 0.2
   distance: 0

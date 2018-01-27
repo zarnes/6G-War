@@ -51,4 +51,10 @@ public class Player
     {
         Satellite.Destroy(this.sats[index]);
     }
+
+
+    public string ToString()
+    {
+        return this.id.ToString();
+    }
 }
