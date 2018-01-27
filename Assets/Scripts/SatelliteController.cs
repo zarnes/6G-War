@@ -10,7 +10,8 @@ public class SatelliteController : MonoBehaviour {
 
     public List<Player> players;
 
-    public PlayersCanvasController pcc;
+    public CanvasController canvasController;
+    public ContractController contractController;
 
     // Use this for initialization
     void Start() {
@@ -50,6 +51,11 @@ public class SatelliteController : MonoBehaviour {
         sats[3].player = players[0];
         players[0].sats.Add(sats[3]);
 
+        canvasController.Init();
+
+        contractController.sc = this;
+        contractController.CreateContract();
+
         StartCoroutine(CalculateZones());
 	}
 
@@ -70,8 +76,11 @@ public class SatelliteController : MonoBehaviour {
             foreach (Satellite sat in sats)
             {
                 sat.CalculateRevenue();
-                pcc.UpdateMoney(players);
+                canvasController.UpdateMoney(players);
             }
+
+            contractController.CheckContract();
+
             yield return new WaitForSeconds(1);
         }
     }
