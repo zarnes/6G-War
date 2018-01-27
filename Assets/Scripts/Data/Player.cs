@@ -14,9 +14,9 @@ public class Player
     public int currentSat;
     public bool switchLock;
 
-    public Player()
+    public Player(int id, List<Zone> zones)
     {
-        id = 0;
+        this.id = id;
 
         money = 0;
         points = 0;
@@ -24,6 +24,11 @@ public class Player
         sats = new List<Satellite>();
         currentSat = 0;
         switchLock = false;
+
+        foreach(Zone zone in zones)
+        {
+            zone.visitedThisFrame.Add(id, 0);
+        }
     }
 
     public void SwitchSatellite(bool next = true)

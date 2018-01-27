@@ -74,7 +74,11 @@ public class Satellite : MonoBehaviour {
             hit = Physics2D.Raycast(start, dir);
             if (hit.transform != null && hit.transform.parent.tag == "Zone")
             {
-                revenues += currentZone.revenue;
+                Zone zone = hit.transform.parent.GetComponent<Zone>();
+                zone.visitedThisFrame[player.id]++;
+
+                if (zone.visitedThisFrame[player.id] == 1)
+                    revenues += currentZone.revenue;
             }
 
             // Last zone checked, break
@@ -82,7 +86,7 @@ public class Satellite : MonoBehaviour {
             {
                 player.money += revenues;
                 return;
-            } 
+            }
 
             // Check next zone
             ++debumper;

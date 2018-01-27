@@ -16,14 +16,18 @@ public class SatelliteController : MonoBehaviour {
     void Start() {
         // Generates sats and zones here
 
+        zones = new List<Zone>();
+        foreach (Transform tfZone in GameObject.Find("Zones").transform)
+        {
+            zones.Add(tfZone.GetComponent<Zone>());
+        }
+
         players = new List<Player>();
 
-        Player pl = new Player();
-        pl.id = 1;
+        Player pl = new Player(1, zones);
         players.Add(pl);
 
-        pl = new Player();
-        pl.id = 2;
+        pl = new Player(2, zones);
         players.Add(pl);
 
         sats = new List<Satellite>(FindObjectsOfType<Satellite>());
@@ -46,12 +50,6 @@ public class SatelliteController : MonoBehaviour {
         sats[3].player = players[0];
         players[0].sats.Add(sats[3]);
 
-        zones = new List<Zone>();
-        foreach (Transform tfZone in GameObject.Find("Zones").transform)
-        {
-            zones.Add(tfZone.GetComponent<Zone>());
-        }
-        
         StartCoroutine(CalculateZones());
 	}
 
@@ -60,6 +58,15 @@ public class SatelliteController : MonoBehaviour {
         yield return new WaitForEndOfFrame();
         while (true)
         {
+            foreach (Zone zone in zones)
+            {
+                zone.visitedThisFrame = new Dictionary<int, int>();
+                foreach(Player player in players)
+                {
+                    zone.visitedThisFrame[player.id] = 0;
+                }
+            }
+
             foreach (Satellite sat in sats)
             {
                 sat.CalculateRevenue();
