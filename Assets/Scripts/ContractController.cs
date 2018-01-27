@@ -25,6 +25,7 @@ public class ContractController : MonoBehaviour {
         type = ContractType.bateaux;
 
         zones = new List<Zone>();
+        List<Zone> validZones;
 
         switch (type)
         {
@@ -32,10 +33,12 @@ public class ContractController : MonoBehaviour {
                 GenerateBanzai();
                 break;
             case ContractType.bateaux:
-                GenerateBateaux();
+                validZones = sc.zones.FindAll(z => z.type == Zone.ZoneType.SEA);
+                GenerateContractZone(validZones);
                 break;
             case ContractType.couverture:
-                GenerateCouverture();
+                validZones = sc.zones.FindAll(z => z.type == Zone.ZoneType.EARTH);
+                GenerateContractZone(validZones);
                 break;
             case ContractType.danger:
                 GenerateDanger();
@@ -67,10 +70,10 @@ public class ContractController : MonoBehaviour {
                 scores = CalculateBanzai();
                 break;
             case ContractType.bateaux:
-                scores = CalculateBateaux();
+                scores = CalculateZones();
                 break;
             case ContractType.couverture:
-                scores = CalculateCouverture();
+                scores = CalculateZones();
                 break;
             case ContractType.danger:
                 scores = CalculateDanger();
@@ -82,7 +85,7 @@ public class ContractController : MonoBehaviour {
                 scores = CalculateSocial();
                 break;
             case ContractType.urbanisme:
-                scores = CalculateUrbanisme();
+                scores = CalculateZones();
                 break;
             default:
                 Debug.LogError("Unknown contract type");
@@ -121,9 +124,8 @@ public class ContractController : MonoBehaviour {
         return new List<int>();
     }
 
-    public List<int> CalculateBateaux()
+    public List<int> CalculateZones()
     {
-
         List<int> scores = new List<int>();
         foreach (Player player in sc.players)
         {
@@ -134,18 +136,13 @@ public class ContractController : MonoBehaviour {
                 int visited = zone.visitedThisFrame[player.id];
                 if (visited > power)
                     visited = power;
-                
-                ++completion;
+
+                completion += visited;
             }
             scores.Add((int)((completion / maxCompletion) * 100));
         }
-        
-        return new List<int>();
-    }
 
-    public List<int> CalculateCouverture()
-    {
-        return new List<int>();
+        return scores;
     }
 
     public List<int> CalculateDanger()
@@ -163,60 +160,11 @@ public class ContractController : MonoBehaviour {
         return new List<int>();
     }
 
-    public List<int> CalculateUrbanisme()
-    {
-        return new List<int>();
-    }
-
     public void GenerateBanzai()
     {
         
     }
-
-    public void GenerateBateaux()
-    {
-        // get a random index in valid zones
-        List<Zone> validZones = sc.zones.FindAll(z => z.type == Zone.ZoneType.SEA);
-        int startingValidZoneIndex = rd.Next(validZones.Count);
-
-        // retrieve the index in the "all zones" list
-        int startingZoneIndex = sc.zones.IndexOf(validZones[startingValidZoneIndex]);
-
-        // calculating variables
-        int size = rd.Next(5);
-        int currentOffset = 1;
-        int direction = 1;
-
-        // main condictions for contract
-        zones.Add(sc.zones[startingZoneIndex]);
-        power = rd.Next(3) + 1;
-
-        while(size > 0)
-        {
-            Zone testedZone = sc.zones[startingZoneIndex + (currentOffset * direction)];
-            if (testedZone.type == Zone.ZoneType.SEA)
-            {
-                zones.Add(testedZone);
-                ++currentOffset;
-                --size;
-            }
-            else if (direction == 1) // if not possible to expend, try the other side
-            {
-                direction = -1;
-                currentOffset = 1;
-            }
-            else // if still not possible, return
-            {
-                return;
-            }
-        }
-    }
-
-    public void GenerateCouverture()
-    {
-
-    }
-
+    
     public void GenerateDanger()
     {
 
@@ -234,7 +182,54 @@ public class ContractController : MonoBehaviour {
 
     public void GenerateUrbanisme()
     {
+        //List<Zone> validZones = sc.zones.FindAll(z => z.subtype == Zone.SubZoneType.TOWN); // TODO change selector and finish
+        //int startingValidZoneIndex = rd.Next();
+    }
 
+    private void GenerateContractZone(List<Zone> validZones)
+    {
+        // get a random index in valid zones
+        Zone.ZoneType type = validZones[0].type;
+        int startingValidZoneIndex = rd.Next(validZones.Count);
+
+        // retrieve the index in the "all zones" list
+        int startingZoneIndex = sc.zones.IndexOf(validZones[startingValidZoneIndex]);
+
+        // calculating variables
+        int size = rd.Next(5);
+        int currentOffset = 1;
+        int direction = 1;
+
+        // main condictions for contract
+        zones.Add(sc.zones[startingZoneIndex]);
+        power = rd.Next(3) + 1;
+
+        while (size > 0)
+        {
+            int testedIndex = startingZoneIndex + (currentOffset * direction);
+
+            if (testedIndex < 0)
+                testedIndex = sc.zones.Count + testedIndex;
+            else if (testedIndex >= sc.zones.Count)
+                testedIndex = testedIndex - sc.zones.Count;
+
+            Zone testedZone = sc.zones[testedIndex];
+            if (testedZone.type == type)
+            {
+                zones.Add(testedZone);
+                ++currentOffset;
+                --size;
+            }
+            else if (direction == 1) // if not possible to expend, try the other side
+            {
+                direction = -1;
+                currentOffset = 1;
+            }
+            else // if still not possible, return
+            {
+                return;
+            }
+        }
     }
 }
 
