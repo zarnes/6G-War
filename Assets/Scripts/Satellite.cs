@@ -35,10 +35,10 @@ public class Satellite : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start ()
+    void Awake ()
     {
         sat = transform.Find("Sprite").transform;
-        //distance = sat.position.y;
+        distance = sat.position.y;
 	}
 
     private void Update()
@@ -53,6 +53,7 @@ public class Satellite : MonoBehaviour {
         List<Zone> zones = sc.zones;
         Zone firstZone = null;
         Zone lastZone = null;
+
 
         Vector2 dir = sat.TransformDirection(new Vector2(-rayWidth, -1) * range);
         Debug.DrawRay(sat.position, dir, color, 1);
