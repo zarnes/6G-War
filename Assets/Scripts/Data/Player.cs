@@ -46,4 +46,9 @@ public class Player
 
         switchLock = true;
     }
+
+    public void looseSatellite(int index)
+    {
+        Satellite.Destroy(this.sats[index]);
+    }
 }
