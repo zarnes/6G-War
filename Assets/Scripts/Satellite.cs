@@ -12,6 +12,12 @@ public class Satellite : MonoBehaviour {
     public Boolean lost = false;
     public Boolean exploded = false;
 
+    public List<Sprite> wingsSprites;
+    public List<Sprite> bodySprites;
+
+    public Sprite bodySprite;
+    public Sprite wingsSprite;
+
     public Sprite explodeSprite;
 
     public float range = 10f;
@@ -37,9 +43,15 @@ public class Satellite : MonoBehaviour {
     // Use this for initialization
     void Awake ()
     {
-        sat = transform.Find("Sprite").transform;
+        sat = transform.Find("SatelliteSprite").transform;
         distance = sat.position.y;
 	}
+
+    public void Init()
+    {
+        sat.Find("Body").GetComponent<SpriteRenderer>().sprite =  this.bodySprite;
+        sat.Find("Wings").GetComponent<SpriteRenderer>().sprite = this.wingsSprite;
+    }
 
     private void Update()
     {
@@ -149,6 +161,9 @@ public class Satellite : MonoBehaviour {
     public void explode()
     {
         this.exploded = true;
+        this.sat.Find("Wings").GetComponent<SpriteRenderer>().sprite = this.explodeSprite;
+        this.player.satDestroyed(this);
+        Destroy(gameObject);
     }
 
     public void looseSatellite()

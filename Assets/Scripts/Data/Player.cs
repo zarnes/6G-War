@@ -14,6 +14,8 @@ public class Player
     public int currentSat;
     public bool switchLock;
 
+    public bool lost = false;
+
     public Player(int id, List<Zone> zones)
     {
         this.id = id;
@@ -53,8 +55,30 @@ public class Player
     }
 
 
-    public string ToString()
+    public override string ToString()
     {
         return this.id.ToString();
+    }
+
+    public void addSat(Satellite sat)
+    {
+        sat.player = this;
+        sat.bodySprite = sat.bodySprites[this.id];
+        sat.wingsSprite = sat.wingsSprites[this.id];
+        sat.Init();
+        this.sats.Add(sat);
+    }
+
+    public void satDestroyed(Satellite sat)
+    {
+        this.sats.Remove(sat);
+        if (this.sats.Count() == 0)
+        {
+            this.lost = true;
+        }
+        else
+        {
+            this.SwitchSatellite();
+        }
     }
 }

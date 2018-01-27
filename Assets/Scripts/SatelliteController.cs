@@ -30,6 +30,10 @@ public class SatelliteController : MonoBehaviour {
 
         pl = new Player(2, zones);
         players.Add(pl);
+        pl = new Player(3, zones);
+        players.Add(pl);
+        pl = new Player(4, zones);
+        players.Add(pl);
 
         sats = new List<Satellite>(FindObjectsOfType<Satellite>());
         foreach (Satellite sat in sats)
@@ -42,15 +46,13 @@ public class SatelliteController : MonoBehaviour {
         }
 
         //placeholder
-        sats[0].player = players[0];
-        players[0].sats.Add(sats[0]);
-        sats[1].player = players[0];
-        players[0].sats.Add(sats[1]);
-        sats[2].player = players[1];
-        players[1].sats.Add(sats[2]);
-        sats[3].player = players[0];
-        players[0].sats.Add(sats[3]);
-	}
+        players[0].addSat(sats[0]);
+        players[0].addSat(sats[1]);
+        players[0].addSat(sats[3]);
+        players[1].addSat(sats[2]);
+        players[2].addSat(sats[4]);
+        players[3].addSat(sats[5]);
+    }
 
     public IEnumerator CalculateZones()
     {
@@ -94,6 +96,10 @@ public class SatelliteController : MonoBehaviour {
             {
                 return;
             }
+            if (player.lost)
+            {
+                continue;
+            }
             
             Vector2 movement = new Vector2(Input.GetAxis("Horizontal" + i), Input.GetAxis("Vertical" + i));
 
@@ -109,12 +115,8 @@ public class SatelliteController : MonoBehaviour {
                     player.sats[player.currentSat].Move(new Vector2(0, -10));
                     if (player.sats[player.currentSat].distance > player.sats[player.currentSat].MaxDistance)
                     {
-                        player.looseSatellite(j);
+                        player.satDestroyed(player.sats[player.currentSat]);
                     }
-                }
-                if (player.sats[j].exploded == true)
-                {
-                    player.looseSatellite(j);
                 }
             }
             //*/
