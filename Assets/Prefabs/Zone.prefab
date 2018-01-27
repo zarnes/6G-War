@@ -51,8 +51,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1870038977258262}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.38, z: 0}
-  m_LocalScale: {x: 0.035037592, y: 0.010201073, z: 1}
+  m_LocalPosition: {x: 0, y: 4.8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4348504091731534}
   m_RootOrder: 0
@@ -87,7 +87,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 20, y: 10}
+    oldSize: {x: 25, y: 25}
     newSize: {x: 20, y: 10}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -109,6 +109,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   revenue: 1
   tf: {fileID: 0}
+  spriteEarth: {fileID: 21300000, guid: 11a25c26a63e0784982f4155b1c2e591, type: 3}
+  spritePole: {fileID: 21300000, guid: 5217c0e54fda4784e8cd0404842a2ce3, type: 3}
+  spriteSea: {fileID: 21300000, guid: 7eb301c32785da342b47714f27f3f44f, type: 3}
+  spriteDefault: {fileID: 0}
 --- !u!212 &212290863555622188
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -143,7 +147,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 89f8156c4fe3de44a8cfc50bc7ca3a81, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 764d9f9379293344b96de64d2a94655a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
