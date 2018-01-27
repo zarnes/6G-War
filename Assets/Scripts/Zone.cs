@@ -11,10 +11,9 @@ public class Zone : MonoBehaviour {
     public enum ZoneType { EARTH, SEA, POLE, NONE };
     private ZoneType Type = ZoneType.NONE;
 
-    public Sprite spriteEarth;
-    public Sprite spritePole;
-    public Sprite spriteSea;
-    public Sprite spriteDefault;
+    public Color colorEarth = Color.red;
+    public Color colorPole = Color.white;
+    public Color colorSea = Color.blue;
 
     public ZoneType type
     {
@@ -25,29 +24,21 @@ public class Zone : MonoBehaviour {
         set
         {
             this.Type = value;
-            Color color;
-            Sprite sprite;
+            Color color = Color.black;
             switch (value)
             {
                 case ZoneType.EARTH:
-                    color = Color.red;
-                    sprite = this.spriteEarth;
+                    color = this.colorEarth;
                     break;
                 case ZoneType.POLE:
-                    color = Color.white;
-                    sprite = this.spritePole;
+                    color = this.colorPole;
                     break;
                 case ZoneType.SEA:
-                    color = Color.blue;
-                    sprite = this.spriteSea;
-                    break;
-                default:
-                    color = Color.black;
-                    sprite = this.spriteDefault;
+                    color = this.colorSea;
                     break;
 
             }
-            transform.Find("Zone Sprite").transform.GetComponent<SpriteRenderer>().sprite = sprite;
+            transform.Find("Zone Sprite").transform.GetComponent<SpriteRenderer>().color = color;
         }
     }
 
