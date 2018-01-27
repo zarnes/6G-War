@@ -14,7 +14,7 @@ public class SatelliteController : MonoBehaviour {
     public ContractController contractController;
 
     // Use this for initialization
-    void Start() {
+    public void Init() {
         // Generates sats and zones here
 
         zones = new List<Zone>();
@@ -50,18 +50,10 @@ public class SatelliteController : MonoBehaviour {
         players[1].sats.Add(sats[2]);
         sats[3].player = players[0];
         players[0].sats.Add(sats[3]);
-
-        canvasController.Init();
-
-        contractController.sc = this;
-        contractController.CreateContract();
-
-        StartCoroutine(CalculateZones());
 	}
 
-    IEnumerator CalculateZones()
+    public IEnumerator CalculateZones()
     {
-        yield return new WaitForEndOfFrame();
         while (true)
         {
             foreach (Zone zone in zones)
@@ -88,6 +80,12 @@ public class SatelliteController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        
+        // To avoir update before start
+        if (players == null)
+            return;
+        
+
         // Manage players input
         for (int i = 1; i <= 4; ++i)
         {
@@ -98,10 +96,10 @@ public class SatelliteController : MonoBehaviour {
             }
             
             Vector2 movement = new Vector2(Input.GetAxis("Horizontal" + i), Input.GetAxis("Vertical" + i));
+
             if (movement != Vector2.zero)
             {
                 player.sats[player.currentSat].Move(movement);
-                //System.Console.WriteLine(movement.x.ToString() + ":" + movement.y.ToString());
             }
             //*
             for (int j = 0; j < player.sats.Count; j++)

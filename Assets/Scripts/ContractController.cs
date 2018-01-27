@@ -12,18 +12,23 @@ public class ContractController : MonoBehaviour {
     private System.Random rd;
 
     private ContractType type;
-
-    private void Start()
-    {
-        rd = new System.Random();
-    }
+    private List<Zone> zones;
 
     public void CreateContract()
     {
+        if (rd == null)
+            rd = new System.Random();
+
         int length = Enum.GetNames(typeof(ContractType)).Length;
         type = (ContractType)rd.Next(length);
-        Debug.Log(type);
 
+        //zone attribution
+        if (type == ContractType.bateaux || type == ContractType.couverture || type == ContractType.urbanisme)
+        {
+
+        }
+
+        // Reroll contract if already
         if (CheckContract(false))
             CreateContract();
 

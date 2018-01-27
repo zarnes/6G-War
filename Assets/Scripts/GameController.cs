@@ -4,18 +4,26 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour {
 
-    public SatelliteController satelliteController;
     public EarthController earthController;
-
+    public SatelliteController satelliteController;
+    public CanvasController canvasController;
+    public ContractController contractController;
 
     // Use this for initialization
-    void Start () {
-        this.earthController = new EarthController();
-        this.satelliteController = new SatelliteController();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    void Start ()
+    {
+        earthController.Init();
+        satelliteController.Init();
+        canvasController.Init();
+
+        contractController.sc = satelliteController;
+        contractController.CreateContract();
+
+        satelliteController.StartCoroutine(satelliteController.CalculateZones());
+    }
+
+    IEnumerator waitFrame()
+    {
+        yield return new WaitForSeconds(1);
+    }
 }

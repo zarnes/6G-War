@@ -42,7 +42,7 @@ public class Zone : MonoBehaviour {
         }
     }
 
-    private void Start()
+    private void Awake()
     {
         tf = transform.Find("Zone Sprite").transform;
         visitedThisFrame = new Dictionary<int, int>();

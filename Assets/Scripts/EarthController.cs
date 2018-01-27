@@ -13,25 +13,25 @@ public class EarthController : MonoBehaviour {
     private int indexNorthPole = 0;
     private int indexSouthPole;
 
-
-    public EarthController()
+    public void Init()
     {
         this.zones = new Zone[this.nbZones];
         this.indexNorthPole = 0;
         this.indexSouthPole = this.nbZones / 2;
-    }
-    private void Start()
-    {
+
         this.earth = transform.Find("EarthSprite");
         this.GenerateZones();
     }
+
     // Update is called once per frame
-    void Update () {
+    void Update ()
+    {
         transform.Rotate(Vector3.forward * Time.deltaTime);
     }
 
     public void GenerateZones()
     {
+        Transform zonesGO = transform.Find("Zones");
         float length = this.earth.GetComponent<CircleCollider2D>().radius / (float)this.nbZones / (float)3.2;
         // 360° / nb ZOnes (4) = 90 °
         //Géné North à South
@@ -39,7 +39,7 @@ public class EarthController : MonoBehaviour {
         rotationVector.z = -1;
         for (int i = this.indexNorthPole; i < this.indexSouthPole; i++ )
         {
-            Zone zoneObject = Instantiate<GameObject>(this.zonePrefab).GetComponent<Zone>();
+            Zone zoneObject = Instantiate(this.zonePrefab, zonesGO).GetComponent<Zone>();
             
             zoneObject.transform.RotateAround(new Vector3(0,0), rotationVector, (float)(360.0 / (float)this.nbZones) * i);
             Vector3 scale = new Vector3(length, (float)0.01020107);
@@ -54,7 +54,7 @@ public class EarthController : MonoBehaviour {
         for (int i = this.indexSouthPole; i < this.nbZones; i++)
         {
             //*
-            Zone zoneObject = Instantiate<GameObject>(this.zonePrefab).GetComponent<Zone>();
+            Zone zoneObject = Instantiate(this.zonePrefab, zonesGO).GetComponent<Zone>();
 
             zoneObject.transform.RotateAround(new Vector3(0, 0), rotationVector, (float)(360.0 / (float)this.nbZones) * i);
             Vector3 scale = new Vector3(length, (float)0.01020107);
@@ -73,7 +73,7 @@ public class EarthController : MonoBehaviour {
         {
             int nbZonesToAffect = random.Next(1, this.nbZones / 4);
             Zone.ZoneType type = (Zone.ZoneType)zoneTypes.GetValue(random.Next(zoneTypes.Length - 2));
-            Debug.Log(type);
+            //Debug.Log(type);
             for (int j  = 0; j < nbZonesToAffect;  j++)
             {
                 index ++;
