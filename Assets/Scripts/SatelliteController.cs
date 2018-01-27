@@ -71,7 +71,25 @@ public class SatelliteController : MonoBehaviour {
             if (movement != Vector2.zero)
             {
                 player.sats[player.currentSat].Move(movement);
+                //System.Console.WriteLine(movement.x.ToString() + ":" + movement.y.ToString());
             }
+            //*
+            for (int j = 0; j < player.sats.Count; j++)
+            {
+                if (player.sats[j].lost == true)
+                {
+                    player.sats[player.currentSat].Move(new Vector2(0, -10));
+                    if (player.sats[player.currentSat].distance > player.sats[player.currentSat].MaxDistance)
+                    {
+                        player.looseSatellite(j);
+                    }
+                }
+                if (player.sats[j].exploded == true)
+                {
+                    player.looseSatellite(j);
+                }
+            }
+            //*/
         }
 
     }

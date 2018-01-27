@@ -734,6 +734,7 @@ GameObject:
   - component: {fileID: 237031294}
   - component: {fileID: 237031293}
   - component: {fileID: 237031295}
+  - component: {fileID: 237031296}
   m_Layer: 0
   m_Name: Game Controller
   m_TagString: Untagged
@@ -772,7 +773,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 237031292}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91d394696bbce43468951d2b54bdf693, type: 3}
   m_Name: 
@@ -780,6 +781,19 @@ MonoBehaviour:
   sats: []
   zones: []
   pcc: {fileID: 737551068}
+--- !u!114 &237031296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 237031292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6c14eb2a6ab24643a7894618b31896e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  satelliteController: {fileID: 0}
+  earthController: {fileID: 0}
 --- !u!1 &238485801 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1870038977258262, guid: a0444933657f9bd44925ab1407a86307,
@@ -946,7 +960,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &273915823
 Transform:
   m_ObjectHideFlags: 0
@@ -1092,11 +1106,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4348504091731534, guid: a0444933657f9bd44925ab1407a86307, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.3995492
+      value: 0.39954922
       objectReference: {fileID: 0}
     - target: {fileID: 4348504091731534, guid: a0444933657f9bd44925ab1407a86307, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.91671175
+      value: 0.9167118
       objectReference: {fileID: 0}
     - target: {fileID: 4348504091731534, guid: a0444933657f9bd44925ab1407a86307, type: 2}
       propertyPath: m_RootOrder
@@ -2426,6 +2440,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sc: {fileID: 0}
   color: {r: 0, g: 0, b: 0, a: 0}
+  lost: 0
+  exploded: 0
+  explodeSprite: {fileID: 0}
   range: 10
   rayWidth: 0.2
   distance: 0
@@ -2834,6 +2851,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5880746be34fa6f4282ed6d3a9c9da08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  zonePrefab: {fileID: 1926472449657716, guid: a0444933657f9bd44925ab1407a86307, type: 2}
+  earth: {fileID: 0}
 --- !u!1001 &1155846253
 Prefab:
   m_ObjectHideFlags: 0
@@ -3234,6 +3253,10 @@ Prefab:
     - target: {fileID: 4136797407264920, guid: 178918e3e1cda9b41b3f47cf5a172746, type: 2}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4379906188770400, guid: 178918e3e1cda9b41b3f47cf5a172746, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 7.71
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 178918e3e1cda9b41b3f47cf5a172746, type: 2}

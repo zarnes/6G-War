@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,23 +9,36 @@ public class Satellite : MonoBehaviour {
     public Player player;
     public Color color;
 
+    public Boolean lost = false;
+    public Boolean exploded = false;
+
+    public Sprite explodeSprite;
+
     public float range = 10f;
     public float rayWidth = 0.2f;
 
     public float distance;
-    private float minDistance = 10;
-    private float maxDistance = 7;
+    private float minDistance = 5;
+    private float maxDistance = 15;
 
     [Range(0, 15)]
     public float speedX = 8f;
     [Range(0, 2)]
     public float speedY = 0.8f;
 
+    public float MaxDistance
+    {
+        get
+        {
+            return this.maxDistance;
+        }
+    }
+
     // Use this for initialization
     void Start ()
     {
         sat = transform.Find("Sprite").transform;
-        distance = sat.position.y;
+        //distance = sat.position.y;
 	}
 
     private void Update()
@@ -103,15 +117,37 @@ public class Satellite : MonoBehaviour {
 
     public void Move(Vector2 move)
     {
-        //distance += move.y;
-        /*if (distance + move.y > maxDistance)
-            move.y = maxDistance - distance;
-        /*else if (distance + move.y < minDistance)
-            move.y = minDistance - distance;*/
+        //*
+        this.distance = sat.position.magnitude + move.y;
+        /*
+        if (lost && distance < 50)
+        {
+            move.y = 5;
+        } else if (distance >= 50)
+        {
+            explode();
+        }
+        //*/
+        if (move.y != 0)
+        {
+            if (this.distance >= maxDistance)
+                looseSatellite();
+            else if (this.distance <= minDistance)
+                explode();
+        }
+        //*/
 
         transform.Rotate(-Vector3.forward * move.x * Time.deltaTime * speedX);
         sat.Translate(-Vector3.up * move.y * Time.deltaTime * speedY);
+    }
 
-        distance = sat.transform.position.y;
+    public void explode()
+    {
+        this.exploded = true;
+    }
+
+    public void looseSatellite()
+    {
+        this.lost = true;
     }
 }

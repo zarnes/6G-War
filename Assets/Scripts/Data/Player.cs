@@ -22,4 +22,9 @@ public class Player
         sats = new List<Satellite>();
         currentSat = 0;
     }
+
+    public void looseSatellite(int index)
+    {
+        Satellite.Destroy(this.sats[index]);
+    }
 }
