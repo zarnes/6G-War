@@ -42,7 +42,7 @@ public class EarthController : MonoBehaviour {
             Zone zoneObject = Instantiate(this.zonePrefab, zonesGO).GetComponent<Zone>();
             
             zoneObject.transform.RotateAround(new Vector3(0,0), rotationVector, (float)(360.0 / (float)this.nbZones) * i);
-            Vector3 scale = new Vector3(length, (float)0.01020107);
+            Vector3 scale = new Vector3(length, (float)0.67);
             zoneObject.transform.Find("Zone Sprite").transform.localScale = scale;
             zones[i] = zoneObject.GetComponent<Zone>();
             if (this.indexNorthPole == i)
