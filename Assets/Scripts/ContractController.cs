@@ -107,8 +107,8 @@ public class ContractController : MonoBehaviour {
             }
         }
 
-        int[] scoresA = { debugFill, debugFill, debugFill, debugFill };
-        scores = new List<int>(scoresA);
+        /*int[] scoresA = { debugFill, debugFill, debugFill, debugFill };
+        scores = new List<int>(scoresA);*/
 
         if (display)
             sc.canvasController.UpdateContractScores(scores);
@@ -123,6 +123,23 @@ public class ContractController : MonoBehaviour {
 
     public List<int> CalculateBateaux()
     {
+
+        List<int> scores = new List<int>();
+        foreach (Player player in sc.players)
+        {
+            float completion = 0;
+            float maxCompletion = zones.Count * power;
+            foreach (Zone zone in zones)
+            {
+                int visited = zone.visitedThisFrame[player.id];
+                if (visited > power)
+                    visited = power;
+                
+                ++completion;
+            }
+            scores.Add((int)((completion / maxCompletion) * 100));
+        }
+        
         return new List<int>();
     }
 
