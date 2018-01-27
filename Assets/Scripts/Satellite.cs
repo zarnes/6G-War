@@ -5,6 +5,7 @@ using UnityEngine;
 public class Satellite : MonoBehaviour {
     public SatelliteController sc;
     private Transform sat;
+    public Player player;
     public Color color;
 
     public float range = 10f;
@@ -32,8 +33,9 @@ public class Satellite : MonoBehaviour {
         Debug.DrawRay(sat.position, sat.TransformDirection(new Vector2(-rayWidth, -1) * range), color, Time.deltaTime);*/
     }
 
-    public float CalculateRevenue()
+    public void CalculateRevenue()
     {
+        float revenues = 0;
         List<Zone> zones = sc.zones;
         Zone firstZone = null;
         Zone lastZone = null;
@@ -43,7 +45,7 @@ public class Satellite : MonoBehaviour {
         RaycastHit2D hit = Physics2D.Raycast(sat.position, dir);
         if (hit.transform != null)
         {
-            firstZone = hit.transform.GetComponent<Zone>();
+            firstZone = hit.transform.parent.GetComponent<Zone>();
         }
 
         dir = sat.TransformDirection(new Vector2(rayWidth, -1) * range);
@@ -51,48 +53,51 @@ public class Satellite : MonoBehaviour {
         hit = Physics2D.Raycast(sat.position, dir, range);
         if (hit.transform != null)
         {
-            lastZone = hit.transform.GetComponent<Zone>();
+            lastZone = hit.transform.parent.GetComponent<Zone>();
         }
 
         if (firstZone == null || lastZone == null)
         {
-            return 0;
+            return;
         }
 
         int index = zones.IndexOf(firstZone);
 
         Zone currentZone = firstZone;
+        int debumper = 0;
         while (true)
         {
             Vector3 start = sat.position;
             dir = currentZone.tf.position - sat.position;
             Debug.DrawRay(start, dir, Color.red, 1);
 
+            hit = Physics2D.Raycast(start, dir);
+            if (hit.transform != null && hit.transform.parent.tag == "Zone")
+            {
+                revenues += currentZone.revenue;
+            }
+
             // Last zone checked, break
             if (currentZone == lastZone)
-                break;
+            {
+                player.money += revenues;
+                return;
+            } 
 
             // Check next zone
+            ++debumper;
             ++index;
             if (index == zones.Count)
                 index = 0;
-        }
 
-        /*foreach (Zone zone in zones)
-        {
-            Vector3 start = sat.position;
-            Vector3 dir =zone.tf.position - sat.position;
-            //Physics2D.raycast(sat.position, sat.position - zone.transform.position, range)
-            Debug.DrawRay(start, dir, Color.red, 1);
-        }*/
-        return 0;
-    }
+            currentZone = zones[index];
 
-    private void CalculateCovering()
-    {
-        List<Satellite> sats = sc.sats;
-        {
-
+            // In case of zone bug, avoid infinite loop
+            if (debumper > zones.Count)
+            {
+                Debug.LogError("too many zones checked !");
+                return;
+            }
         }
     }
 
@@ -103,10 +108,9 @@ public class Satellite : MonoBehaviour {
             move.y = maxDistance - distance;
         /*else if (distance + move.y < minDistance)
             move.y = minDistance - distance;*/
-        
 
         transform.Rotate(-Vector3.forward * move.x * Time.deltaTime * speedX);
-        sat.Translate(Vector3.up * move.y * Time.deltaTime * speedY);
+        sat.Translate(-Vector3.up * move.y * Time.deltaTime * speedY);
 
         distance = sat.transform.position.y;
     }

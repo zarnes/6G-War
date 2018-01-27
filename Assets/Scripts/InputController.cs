@@ -9,6 +9,11 @@ public class InputController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        for (int i = 1; i <= 4; ++i)
+        {
+            Debug.Log(i + " : horizontal : " + Input.GetAxis("Horizontal" + i) + ", vertical : " + Input.GetAxis("Vertical" + i));
+        }
+
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
 

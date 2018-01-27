@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4008885852355382}
   - component: {fileID: 212290863555622188}
+  - component: {fileID: 61296918295687388}
   m_Layer: 0
   m_Name: Zone Sprite
   m_TagString: Untagged
@@ -36,10 +37,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4348504091731534}
   - component: {fileID: 114290352464283146}
-  - component: {fileID: 61071465965322210}
   m_Layer: 0
   m_Name: Zone
-  m_TagString: Untagged
+  m_TagString: Zone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,30 +71,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61071465965322210
+--- !u!61 &61296918295687388
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1926472449657716}
+  m_GameObject: {fileID: 1870038977258262}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 20, y: 10}
+    newSize: {x: 20, y: 10}
+    adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 20, y: 10}
   m_EdgeRadius: 0
 --- !u!114 &114290352464283146
 MonoBehaviour:
