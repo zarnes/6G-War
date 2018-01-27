@@ -6,6 +6,7 @@ public class Zone : MonoBehaviour {
 
     public float revenue = 1;
     public Transform tf;
+    public Dictionary<int, int> visitedThisFrame;
 
     public enum ZoneType { EARTH, SEA, POLE, NONE };
     private ZoneType Type = ZoneType.NONE;
@@ -44,5 +45,6 @@ public class Zone : MonoBehaviour {
     private void Start()
     {
         tf = transform.Find("Zone Sprite").transform;
+        visitedThisFrame = new Dictionary<int, int>();
     }
 }
