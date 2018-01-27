@@ -12,8 +12,8 @@ public class SatelliteController : MonoBehaviour {
 
     public PlayersCanvasController pcc;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start() {
         // Generates sats and zones here
 
         players = new List<Player>();
@@ -22,15 +22,29 @@ public class SatelliteController : MonoBehaviour {
         pl.id = 1;
         players.Add(pl);
 
+        pl = new Player();
+        pl.id = 2;
+        players.Add(pl);
+
         sats = new List<Satellite>(FindObjectsOfType<Satellite>());
         foreach (Satellite sat in sats)
         {
             sat.sc = this;
 
             // placeholder
-            sat.player = players[0];
-            players[0].sats.Add(sat);
+            /*sat.player = players[0];
+            players[0].sats.Add(sat);*/
         }
+
+        //placeholder
+        sats[0].player = players[0];
+        players[0].sats.Add(sats[0]);
+        sats[1].player = players[0];
+        players[0].sats.Add(sats[1]);
+        sats[2].player = players[1];
+        players[1].sats.Add(sats[2]);
+        sats[3].player = players[0];
+        players[0].sats.Add(sats[3]);
 
         zones = new List<Zone>();
         foreach (Transform tfZone in GameObject.Find("Zones").transform)
@@ -72,7 +86,15 @@ public class SatelliteController : MonoBehaviour {
             {
                 player.sats[player.currentSat].Move(movement);
             }
-        }
 
+            // Handle satellite switching
+            float switchSat = Input.GetAxis("SwitchLeft" + i);
+            if (switchSat == 1 && !player.switchLock)
+                player.SwitchSatellite();
+            else if (switchSat == -1 && !player.switchLock)
+                player.SwitchSatellite(false);
+            else if (switchSat == 0 && player.switchLock)
+                player.switchLock = false;
+        }
     }
 }
