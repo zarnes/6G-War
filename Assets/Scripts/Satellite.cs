@@ -104,7 +104,6 @@ public class Satellite : MonoBehaviour {
             }
 
             // Check next zone
-            ++debumper;
             ++index;
             if (index == zones.Count)
                 index = 0;
@@ -112,6 +111,7 @@ public class Satellite : MonoBehaviour {
             currentZone = zones[index];
 
             // In case of zone bug, avoid infinite loop
+            ++debumper;
             if (debumper > zones.Count)
             {
                 Debug.LogError("too many zones checked !");

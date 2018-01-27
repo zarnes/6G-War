@@ -35,10 +35,6 @@ public class SatelliteController : MonoBehaviour {
         foreach (Satellite sat in sats)
         {
             sat.sc = this;
-
-            // placeholder
-            /*sat.player = players[0];
-            players[0].sats.Add(sat);*/
         }
 
         //placeholder
