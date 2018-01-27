@@ -48,7 +48,7 @@ public class EarthController : MonoBehaviour {
             Zone zoneObject = Instantiate(this.zonePrefab, zonesParent).GetComponent<Zone>();
             
             zoneObject.transform.RotateAround(new Vector3(0,0), rotationVector, (float)(360.0 / (float)this.nbZones) * i);
-            Vector3 scale = new Vector3(length, (float)0.01020107);
+            Vector3 scale = new Vector3(length, (float)0.67);
             zoneObject.transform.Find("Zone Sprite").transform.localScale = scale;
             Vector3 position = new Vector3(0, this.earth.GetComponent<CircleCollider2D>().radius * this.earth.transform.localScale.y);
             zoneObject.transform.Find("Zone Sprite").transform.localPosition = position;
