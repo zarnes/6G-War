@@ -46,6 +46,7 @@ public class EarthController : MonoBehaviour {
         for (int i = start; i < end; i++)
         {
             Zone zoneObject = Instantiate(this.zonePrefab, zonesParent).GetComponent<Zone>();
+            zoneObject.transform.Find("Zone Sprite").GetComponent<ParticleSystem>().Stop();
             
             zoneObject.transform.RotateAround(new Vector3(0,0), rotationVector, (float)(360.0 / (float)this.nbZones) * i);
             Vector3 scale = new Vector3(length, (float)0.67);
