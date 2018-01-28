@@ -437,6 +437,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainMenu: {fileID: 575974743}
   StartMenu: {fileID: 378421296}
+  playerController: {fileID: 850016068}
 --- !u!4 &539204379
 Transform:
   m_ObjectHideFlags: 0

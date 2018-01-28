@@ -67,7 +67,6 @@ public class Zone : MonoBehaviour {
     {
         Sprite sprite;
         int value = (int)(UnityEngine.Random.value * 100f);
-        Debug.Log(value);
         if (value < this.lowestLimit)
         {
             this.revenue = 2f;
