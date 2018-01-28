@@ -44,20 +44,10 @@ public class GameController : MonoBehaviour {
             wings.Add(pl.wingsSprite);
         }
         canvasController.SetSprites(cores, wings);
-
-        //meteoriteController.Init();
         
-        /*foreach (Zone zone in zones)
-        {
-            zone.visitedThisFrame = new Dictionary<int, int>();
-            foreach(Player player in satelliteController.players)
-            {
-                zone.visitedThisFrame.Add(player.id, 0);
-            }
-        }*/
+        meteoriteController.Init();
 
         contractController.sc = satelliteController;
-        contractController.CreateContract();
 
         //Placeholder ? TODO
         foreach(Player player in satelliteController.players)
@@ -68,6 +58,7 @@ public class GameController : MonoBehaviour {
         }
 
         satelliteController.StartCoroutine(satelliteController.CalculateZones());
+        contractController.CreateContract();
     }
 
     IEnumerator waitFrame()

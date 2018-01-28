@@ -179,6 +179,13 @@ public class Satellite : MonoBehaviour {
             player.satDestroyed(this);
 
         sc.sats.Remove(this);
+        StartCoroutine(Iexplode());
+    }
+
+    private IEnumerator Iexplode()
+    {
+        GetComponent<AnimRenderer>().enabled = true;
+        yield return new WaitForSeconds(0.8f);
         Destroy(gameObject);
     }
 

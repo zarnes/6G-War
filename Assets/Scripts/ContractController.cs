@@ -24,7 +24,7 @@ public class ContractController : MonoBehaviour {
 
         int length = Enum.GetNames(typeof(ContractType)).Length;
         type = (ContractType)rd.Next(length);
-        type = ContractType.bateaux;
+        //type = ContractType.bateaux;
 
         zones = new List<Zone>();
         List<Zone> validZones;
@@ -32,7 +32,7 @@ public class ContractController : MonoBehaviour {
         switch (type)
         {
             case ContractType.banzai:
-                GenerateBanzai();
+                CreateContract();
                 break;
             case ContractType.bateaux:
                 validZones = sc.zones.FindAll(z => z.type == Zone.ZoneType.SEA);
@@ -43,16 +43,16 @@ public class ContractController : MonoBehaviour {
                 GenerateContractZone(validZones);
                 break;
             case ContractType.danger:
-                GenerateDanger();
+                CreateContract();
                 break;
             case ContractType.espionnage:
-                GenerateEspionnage();
+                CreateContract();
                 break;
             case ContractType.social:
-                GenerateSocial();
+                CreateContract();
                 break;
             case ContractType.urbanisme:
-                GenerateUrbanisme();
+                CreateContract();
                 break;
         }
 

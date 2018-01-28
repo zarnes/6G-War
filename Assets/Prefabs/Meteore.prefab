@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 4353603880036892}
   - component: {fileID: 212996676606489520}
   - component: {fileID: 58677101956390680}
+  - component: {fileID: 50469258029987980}
+  - component: {fileID: 114855137361437838}
   m_Layer: 0
   m_Name: MeteoreSprite
   m_TagString: Untagged
@@ -38,7 +40,7 @@ GameObject:
   - component: {fileID: 4131402218591562}
   - component: {fileID: 212211112118255540}
   - component: {fileID: 58147645188083380}
-  - component: {fileID: 114200212188438176}
+  - component: {fileID: 114738326673552014}
   m_Layer: 0
   m_Name: Meteore
   m_TagString: Untagged
@@ -53,7 +55,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1807768891846416}
   m_LocalRotation: {x: 0, y: 0, z: -0.4694715, w: 0.8829476}
-  m_LocalPosition: {x: -15, y: -15, z: 0}
+  m_LocalPosition: {x: -15, y: -15, z: 3}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 4353603880036892}
@@ -67,12 +69,32 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1436572932138688}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 130.6, z: 0}
+  m_LocalPosition: {x: 0, y: 130.6, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4131402218591562}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50469258029987980
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1436572932138688}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!58 &58147645188083380
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -97,13 +119,13 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.67
---- !u!114 &114200212188438176
+--- !u!114 &114738326673552014
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -111,7 +133,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1807768891846416}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c83227a2ade8c34fa301b0293e10dac, type: 3}
+  m_Script: {fileID: 11500000, guid: 2c9a0b2a9b0d3a941ad46f34f92ac0d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114855137361437838
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1436572932138688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f406d1b0f5531a642a53a1ac95f54481, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &212211112118255540
