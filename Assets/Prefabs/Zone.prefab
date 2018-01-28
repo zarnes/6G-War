@@ -97,8 +97,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1711061658832470}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 6.3, z: -0.99}
+  m_LocalScale: {x: 0.67, y: 0.67, z: 1}
   m_Children: []
   m_Father: {fileID: 4348504091731534}
   m_RootOrder: 1
@@ -144,12 +144,16 @@ MonoBehaviour:
   lowestLimit: 11
   lowerLimit: 21
   upperLimit: 90
+  withBonus: 0
   spritePole: {fileID: 21300000, guid: 5217c0e54fda4784e8cd0404842a2ce3, type: 3}
   spriteSea: {fileID: 21300000, guid: 7eb301c32785da342b47714f27f3f44f, type: 3}
   spriteGrass: {fileID: 21300000, guid: 11a25c26a63e0784982f4155b1c2e591, type: 3}
   spriteSand: {fileID: 21300000, guid: d7b23d7f64d43c942b006176f686065b, type: 3}
   spriteTown: {fileID: 21300000, guid: e01d2fc3167509440903ba3d6c493164, type: 3}
   spriteMountain: {fileID: 21300000, guid: a7600d283a47dfa44bbe7f2c3194ca7e, type: 3}
+  spriteBonusCity: {fileID: 21300000, guid: 6ee0de554a9027245a7f581095bc52f7, type: 3}
+  spriteBonusPlatform: {fileID: 21300000, guid: d02ba573a103bc0439ea03f22bc5b10d,
+    type: 3}
 --- !u!198 &198950507492147654
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -3599,15 +3603,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 764d9f9379293344b96de64d2a94655a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 25, y: 25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
 --- !u!212 &212290863555622188
 SpriteRenderer:
