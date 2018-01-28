@@ -21,6 +21,9 @@ public class SatelliteBehavior : MonoBehaviour {
         } else if (other.gameObject.name == "Zone Sprite")
         {
             parent.explode();
+        } else if (other.gameObject.name == "MeteoreSprite")
+        {
+            parent.explode();
         } else
         {
             Debug.Log(other.gameObject.name);

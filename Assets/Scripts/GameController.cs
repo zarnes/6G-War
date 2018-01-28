@@ -32,7 +32,7 @@ public class GameController : MonoBehaviour {
 
         satelliteController.Init();
         canvasController.Init();
-        //meteoriteController.Init();
+        meteoriteController.Init();
         
         /*foreach (Zone zone in zones)
         {

@@ -52,7 +52,7 @@ public class MeteoriteController : MonoBehaviour {
 
             this.meteores.Add(meteore);
 
-            int time = random.Next(5, 20);
+            int time = random.Next(3, 10);
 
 
             yield return new WaitForSeconds(time);
@@ -67,9 +67,13 @@ public class MeteoriteController : MonoBehaviour {
         }
         for (int i = 0; i < this.meteores.Count; i++)
         {
+            if (this.meteores[i] == null)
+            {
+                this.meteores.Remove(this.meteores[i]);
+            }
             GameObject meteore = this.meteores[i];
             Vector3 position = meteore.transform.Find("MeteoreSprite").transform.localPosition;
-            position.y += -0.25f;
+            position.y += -0.35f;
             position.x = 0;
             meteore.transform.Find("MeteoreSprite").transform.localPosition = position;
             if (position.y < -200)
