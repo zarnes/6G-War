@@ -13,6 +13,9 @@ public class SatelliteController : MonoBehaviour {
     public CanvasController canvasController;
     public ContractController contractController;
 
+    public List<Sprite> wingsSprites;
+    public List<Sprite> bodySprites;
+
     // Use this for initialization
     public void Init() {
         // Generates sats and zones here
@@ -26,11 +29,20 @@ public class SatelliteController : MonoBehaviour {
         players = new List<Player>();
 
         Player pl = new Player(1, zones);
+        pl.color = new Color(255, 0, 0, 0.37f);
+        pl.bodySprite = bodySprites[pl.id];
+        pl.wingsSprite = wingsSprites[pl.id];
         players.Add(pl);
 
         pl = new Player(2, zones);
+        pl.color = new Color(0, 255, 0, 0.37f);
+        pl.bodySprite = bodySprites[pl.id];
+        pl.wingsSprite = wingsSprites[pl.id];
         players.Add(pl);
         pl = new Player(3, zones);
+        pl.color = new Color(0, 0, 255, 0.37f);
+        pl.bodySprite = bodySprites[pl.id];
+        pl.wingsSprite = wingsSprites[pl.id];
         players.Add(pl);
         //pl = new Player(4, zones);
         //players.Add(pl);

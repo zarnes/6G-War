@@ -11,13 +11,7 @@ public class Satellite : MonoBehaviour {
 
     public Boolean lost = false;
     public Boolean exploded = false;
-
-    public List<Sprite> wingsSprites;
-    public List<Sprite> bodySprites;
-
-    public Sprite bodySprite;
-    public Sprite wingsSprite;
-
+    
     public Sprite explodeSprite;
 
     public float range = 10f;
@@ -49,8 +43,6 @@ public class Satellite : MonoBehaviour {
 
     public void Init()
     {
-        sat.Find("Body").GetComponent<SpriteRenderer>().sprite =  this.bodySprite;
-        sat.Find("Wings").GetComponent<SpriteRenderer>().sprite = this.wingsSprite;
     }
 
     public void CalculateRevenue()
@@ -166,5 +158,14 @@ public class Satellite : MonoBehaviour {
     public void looseSatellite()
     {
         this.lost = true;
+    }
+    
+
+    public void setSkin(Sprite bodySprite, Sprite wingsSprite, Color color)
+    {
+
+        sat.Find("Body").GetComponent<SpriteRenderer>().sprite = bodySprite;
+        sat.Find("Wings").GetComponent<SpriteRenderer>().sprite = wingsSprite;
+        this.sat.Find("Cone").GetComponent<SpriteRenderer>().color = color;
     }
 }
