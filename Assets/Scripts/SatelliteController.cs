@@ -16,9 +16,12 @@ public class SatelliteController : MonoBehaviour {
 
     public List<Sprite> wingsSprites;
     public List<Sprite> bodySprites;
-
+    
     public GameObject satellitePrefab;
-
+    public int maxDistance = 13;
+    public int lostDistance = 30;
+    
+        // Generates sats and zones here
     private System.Random rnd;
 
     // Use this for initialization
@@ -190,8 +193,8 @@ public class SatelliteController : MonoBehaviour {
             {
                 if (player.sats[j].lost == true)
                 {
-                    player.sats[player.currentSat].Move(new Vector2(0, -10));
-                    if (player.sats[player.currentSat].distance > player.sats[player.currentSat].MaxDistance)
+                    player.sats[player.currentSat].Move(new Vector2(0, -5));
+                    if (player.sats[player.currentSat].distance > this.lostDistance)
                     {
                         player.satDestroyed(player.sats[player.currentSat]);
                     }
