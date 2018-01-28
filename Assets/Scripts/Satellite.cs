@@ -38,15 +38,27 @@ public class Satellite : MonoBehaviour {
     void Awake ()
     {
         sat = transform.Find("SatelliteSprite").transform;
-        distance = sat.position.y;
+        StartCoroutine(Rise());
+        //distance = sat.position.y;
 	}
 
-    public void Init()
+    private IEnumerator Rise()
     {
+        /*iTween.MoveAdd(sat.gameObject, transform.forward * (minDistance + 2), 5f);
+        yield return new WaitForSeconds(5);
+        sat.GetComponent<CircleCollider2D>().enabled = true;*/
+        yield return null;
     }
 
     public void CalculateRevenue()
     {
+        if (player == null)
+        {
+            Debug.LogWarning("No player for " + name);
+            //explode();
+            return;
+        }
+
         float revenues = 0;
         List<Zone> zones = sc.zones;
         Zone firstZone = null;
@@ -150,8 +162,10 @@ public class Satellite : MonoBehaviour {
     {
         this.exploded = true;
         this.sat.Find("Wings").GetComponent<SpriteRenderer>().sprite = this.explodeSprite;
-        this.player.satDestroyed(this);
-        this.sc.sats.Remove(this);
+        if (player != null)
+            player.satDestroyed(this);
+
+        sc.sats.Remove(this);
         Destroy(gameObject);
     }
 
@@ -163,7 +177,6 @@ public class Satellite : MonoBehaviour {
 
     public void setSkin(Sprite bodySprite, Sprite wingsSprite, Color color)
     {
-
         sat.Find("Body").GetComponent<SpriteRenderer>().sprite = bodySprite;
         sat.Find("Wings").GetComponent<SpriteRenderer>().sprite = wingsSprite;
         this.sat.Find("Cone").GetComponent<SpriteRenderer>().color = color;

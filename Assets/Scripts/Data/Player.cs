@@ -13,15 +13,20 @@ public class Player
     public List<Satellite> sats;
     public int currentSat;
     public bool switchLock;
+    public bool buyFlag;
+
     public Color color;
     public Sprite bodySprite;
     public Sprite wingsSprite;
 
     public bool lost = false;
 
-    public Player(int id, List<Zone> zones)
+    public Player(int id, Sprite bodySprite, Sprite wingsSprite, Color color)
     {
         this.id = id;
+        this.bodySprite = bodySprite;
+        this.wingsSprite = wingsSprite;
+        this.color = color;
 
         money = 0;
         points = 0;
@@ -29,11 +34,6 @@ public class Player
         sats = new List<Satellite>();
         currentSat = 0;
         switchLock = false;
-
-        foreach(Zone zone in zones)
-        {
-            zone.visitedThisFrame.Add(id, 0);
-        }
     }
 
     public void SwitchSatellite(bool next = true)
@@ -52,35 +52,35 @@ public class Player
         switchLock = true;
     }
 
-    public void looseSatellite(int index)
+    public void LoseSatellite(int index)
     {
-        Satellite.Destroy(this.sats[index]);
+        Object.Destroy(sats[index]);
     }
 
 
     public override string ToString()
     {
-        return this.id.ToString();
+        return id.ToString();
     }
 
     public void addSat(Satellite sat)
     {
         sat.player = this;
-        sat.setSkin(this.bodySprite, this.wingsSprite, this.color);
-        this.sats.Add(sat);
+        sat.setSkin(bodySprite, wingsSprite, color);
+        sats.Add(sat);
     }
 
     public void satDestroyed(Satellite sat)
     {
-        this.SwitchSatellite(false);
-        this.sats.Remove(sat);
-        if (this.sats.Count == 0)
+        SwitchSatellite(false);
+        sats.Remove(sat);
+        if (sats.Count == 0)
         {
-            this.lost = true;
+            lost = true;
         }
-        if (this.currentSat == this.sats.Count)
+        if (currentSat == sats.Count)
         {
-            this.currentSat--;
+            currentSat--;
         }
     }
 }

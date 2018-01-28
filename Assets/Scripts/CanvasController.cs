@@ -46,30 +46,30 @@ public class CanvasController : MonoBehaviour
         }
     }
 
-    public void UpdateContract(ContractType type)
+    public void UpdateContract(ContractType type, int level)
     {
         switch (type)
         {
             case ContractType.banzai:
-                contractName.text = "Banzaï";
+                contractName.text = "Banzaï ! Détruire " + level + " de vos satellites";
                 return;
             case ContractType.bateaux:
-                contractName.text = "Réseau maritime";
+                contractName.text = "Réseau maritime niveau " + level;
                 return;
             case ContractType.couverture:
-                contractName.text = "Couverture privilégiée";
+                contractName.text = "Couverture privilégiée niveau " + level;
                 return;
             case ContractType.danger:
-                contractName.text = "Vents solaires";
+                contractName.text = "Vents solaires. Baissez vos orbites";
                 return;
             case ContractType.espionnage:
-                contractName.text = "Espionnage";
+                contractName.text = "Espionnez " + level + " satellite" + (level == 1 ? "" : "s") + " ennemi" + (level == 1 ? "" : "s");
                 return;
             case ContractType.social:
-                contractName.text = "Plan social";
+                contractName.text = "Plan social. Sacrifiez " + level + " satellite" + (level == 1 ? "" : "s");
                 return;
             case ContractType.urbanisme:
-                contractName.text = "Urbanisme";
+                contractName.text = "Urbanisme niveau " + level;
                 return;
         }
     }
