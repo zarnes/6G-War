@@ -13,11 +13,13 @@ public class CanvasController : MonoBehaviour
     // player variables
     List<Text> names;
     List<Text> money;
+    List<Text> nextBuy;
 
 	public void Init ()
     {
         names = new List<Text>();
         money = new List<Text>();
+        nextBuy = new List<Text>();
 
         foreach (Transform playerTf in transform.Find("SidePanel/Players"))
         {
