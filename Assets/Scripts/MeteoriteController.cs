@@ -10,18 +10,24 @@ public class MeteoriteController : MonoBehaviour {
     int distance;
     Vector3 earthPoint = new Vector3(0, 0);
 
+    public GameObject meteorePrefab;
+    List<GameObject> meteores;
+
     public void Init()
     {
         SpawnPoint1 = -56;
         SpawnPoint2 = 128;
-        distance = 65;
+        distance = 130;
+        this.meteores = new List<GameObject>();
         StartCoroutine(this.SpawnMeteorites());
     }
 
     public IEnumerator SpawnMeteorites()
     {
         System.Random random = new System.Random();
-        while(true) {
+        while(true)
+        {
+            Vector3 target = new Vector3(random.Next(-20, 30), random.Next(-15, 15));
             Vector3 spawnPointRotation = new Vector3(0, 0);
             int point = random.Next(2);
             if (point == 1)
@@ -31,12 +37,46 @@ public class MeteoriteController : MonoBehaviour {
             {
                 spawnPointRotation.z = SpawnPoint2;
             }
-            Vector3 direction = new Vector3(random.Next(-20, 300), random.Next(-15, 15));
+            GameObject meteore = Instantiate(this.meteorePrefab);
+            meteore.transform.position = target;
+            Vector3 zAxis = new Vector3(0, 0, 1);
+            meteore.transform.RotateAround(target, zAxis, spawnPointRotation.z);
+            Vector3 scale = meteore.transform.localScale;
+            Vector3 meteorePoint = new Vector3(0, this.distance, 3);
+            meteore.transform.Find("MeteoreSprite").transform.position = meteorePoint;
 
-            Debug.DrawRay(spawnPointRotation, direction);
 
 
-            yield return new WaitForSeconds(random.Next(5, 20));
+
+
+
+            this.meteores.Add(meteore);
+
+            int time = random.Next(5, 20);
+
+
+            yield return new WaitForSeconds(time);
+        }
+    }
+
+    public void Update()
+    {
+        if (this.meteores == null)
+        {
+            return;
+        }
+        for (int i = 0; i < this.meteores.Count; i++)
+        {
+            GameObject meteore = this.meteores[i];
+            Vector3 position = meteore.transform.Find("MeteoreSprite").transform.localPosition;
+            position.y += -0.25f;
+            position.x = 0;
+            meteore.transform.Find("MeteoreSprite").transform.localPosition = position;
+            if (position.y < -200)
+            {
+                Destroy(meteore);
+                this.meteores.Remove(meteore);
+            }
         }
     }
 
