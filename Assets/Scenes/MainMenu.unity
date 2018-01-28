@@ -693,6 +693,60 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 825727910}
+--- !u!1 &850016067
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 850016069}
+  - component: {fileID: 850016068}
+  m_Layer: 0
+  m_Name: PlayersController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &850016068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 850016067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fef25dc9b1157943b22a61e5a816a20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cores:
+  - {fileID: 21300000, guid: cea1c1786ef862a4ba9c421a72eeaf0a, type: 3}
+  - {fileID: 21300000, guid: 010e7b2c69a26bf418d1ed14427644e8, type: 3}
+  - {fileID: 21300000, guid: c476d18657a60ef43af0663ff139d4a9, type: 3}
+  - {fileID: 21300000, guid: 26660861bf95d83468935b17de6f9c3f, type: 3}
+  - {fileID: 21300000, guid: 42f05a1bc8aba4746aa0956cf135346f, type: 3}
+  - {fileID: 21300000, guid: 12bc068f6ccda5a48afcdb87a56706f6, type: 3}
+  wings:
+  - {fileID: 21300000, guid: 381b366e914bca74983aa97e533ced93, type: 3}
+  - {fileID: 21300000, guid: 9c08216bd7ca0e24e85fce8cb8f087d5, type: 3}
+  - {fileID: 21300000, guid: 4ed7f034b5f6b5140966535336fbdc5c, type: 3}
+  - {fileID: 21300000, guid: 324d265161b85e847bdc2ca953a53c22, type: 3}
+  - {fileID: 21300000, guid: 5639fc24cd2d93947b463b15188c4597, type: 3}
+  - {fileID: 21300000, guid: 9807c9529a4b9b74694978ddb6c04b7b, type: 3}
+--- !u!4 &850016069
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 850016067}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.3220024, y: 0.5083385, z: 1.0003172}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1401596050
 GameObject:
   m_ObjectHideFlags: 0
