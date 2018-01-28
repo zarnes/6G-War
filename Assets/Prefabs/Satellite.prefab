@@ -52,6 +52,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4992044870740970}
   - component: {fileID: 114999927497267314}
+  - component: {fileID: 114749231490091032}
   m_Layer: 8
   m_Name: Satellite
   m_TagString: Satellite
@@ -197,6 +198,29 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &114749231490091032
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1220908284088510}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 377cf59f12ca4ab47895cf1521c0e304, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  steps:
+  - {fileID: 21300000, guid: 5878b27d7c78a744aa97f5a228adab8d, type: 3}
+  - {fileID: 21300000, guid: 784317b000c7cf04db96184efbfcad5f, type: 3}
+  - {fileID: 21300000, guid: 797b9cbabf4b27941ae52e1a2ad3be4d, type: 3}
+  - {fileID: 21300000, guid: 7a4d02ea5213f4545ab1fb3a3d42c8a5, type: 3}
+  - {fileID: 21300000, guid: 7cbf960497a92e64a93f6acc0bc4df0d, type: 3}
+  - {fileID: 21300000, guid: 96e95a8ea6564dd4fac4f8629d0c11a3, type: 3}
+  - {fileID: 21300000, guid: 1c97a5109abad4346be910bfa469e706, type: 3}
+  - {fileID: 21300000, guid: 9355daff17ab1b24db6d52a32403105f, type: 3}
+  frameDuration: 100
+  loop: 0
+  playing: 0
 --- !u!114 &114953667674841108
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -361,5 +385,5 @@ SpriteRenderer:
   m_Size: {x: 3.38, y: 3.38}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0

@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour {
     public List<Player> players;
 
 	// Use this for initialization
-	void Start ()
+	public void Init ()
     {
         if (GameObject.FindGameObjectsWithTag("PlayerController").Length > 1)
             Destroy(gameObject);
