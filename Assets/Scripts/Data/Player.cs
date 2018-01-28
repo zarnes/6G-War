@@ -9,6 +9,7 @@ public class Player
 
     public float money;
     public float points;
+    public int satellitesBought = 1;
 
     public List<Satellite> sats;
     public int currentSat;

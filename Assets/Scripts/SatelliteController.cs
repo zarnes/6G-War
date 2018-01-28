@@ -5,6 +5,9 @@ using System.Linq;
 
 public class SatelliteController : MonoBehaviour {
 
+    public float multiplier;
+    public float satPrice;
+
     public List<Satellite> sats;
     public List<Zone> zones;
 
@@ -21,7 +24,7 @@ public class SatelliteController : MonoBehaviour {
     public int maxDistance = 13;
     public int lostDistance = 30;
     
-        // Generates sats and zones here
+    // Generates sats and zones here
     private System.Random rnd;
 
     // Use this for initialization
@@ -214,13 +217,20 @@ public class SatelliteController : MonoBehaviour {
 
             // A button
             float a = Input.GetAxis("A" + i);
-            if (a > 0.5f && !player.buyFlag)
+
+            if (a > 0.1f && !player.buyFlag)
             {
-                Debug.Log(player.id + " buying");
-                player.buyFlag = true;
-                // add money condition
+                float price = player.satellitesBought * satPrice * multiplier;
+                if (player.money >= price)
+                {
+                    player.buyFlag = true;
+                    player.money -= price;
+                    player.satellitesBought++;
+                    SpawnSatellite(player);
+                    canvasController.UpdateMoney(players);
+                }
             }
-            else if (a < 0.5f && player.buyFlag)
+            else if (a < 0.1f && player.buyFlag)
             {
                 player.buyFlag = false;
             }

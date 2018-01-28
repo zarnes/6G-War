@@ -406,7 +406,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 119275227}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 0, z: 0}
+  m_LocalPosition: {x: 5, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -423,6 +423,7 @@ GameObject:
   - component: {fileID: 237031295}
   - component: {fileID: 237031296}
   - component: {fileID: 237031293}
+  - component: {fileID: 237031297}
   m_Layer: 0
   m_Name: Game Controller
   m_TagString: Untagged
@@ -445,6 +446,7 @@ MonoBehaviour:
   satelliteController: {fileID: 237031295}
   canvasController: {fileID: 737551068}
   contractController: {fileID: 237031296}
+  meteoriteController: {fileID: 237031297}
 --- !u!4 &237031294
 Transform:
   m_ObjectHideFlags: 0
@@ -469,6 +471,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91d394696bbce43468951d2b54bdf693, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  multiplier: 0
+  satPrice: 0
   sats: []
   zones: []
   canvasController: {fileID: 737551068}
@@ -489,6 +493,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 12bc068f6ccda5a48afcdb87a56706f6, type: 3}
   satellitePrefab: {fileID: 1220908284088510, guid: 178918e3e1cda9b41b3f47cf5a172746,
     type: 2}
+  maxDistance: 13
+  lostDistance: 30
 --- !u!114 &237031296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -503,6 +509,19 @@ MonoBehaviour:
   debugFill: 100
   sc: {fileID: 0}
   inContract: 0
+--- !u!114 &237031297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 237031292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6204943816ff3e045840a813f7f33738, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meteorePrefab: {fileID: 1807768891846416, guid: d5ab1ba40afae5946a9717deb6144f5d,
+    type: 2}
 --- !u!1 &244870110
 GameObject:
   m_ObjectHideFlags: 0

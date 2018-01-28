@@ -14,39 +14,47 @@ public class Satellite : MonoBehaviour {
     
     public Sprite explodeSprite;
 
-    public float range = 10f;
+    public float range = 13f;
     public float rayWidth = 0.2f;
 
-    public float distance;
-    private float minDistance = 7.5f;
-    private float maxDistance = 13;
+    public float distance = 10f;
+    public float minDistance = 7.5f;
+    public float maxDistance = 13;
 
-    [Range(0, 15)]
+    [Range(0, 20)]
     public float speedX = 8f;
-    [Range(0, 2)]
+    [Range(0, 3)]
     public float speedY = 0.8f;
 
-    public float MaxDistance
+    bool controlable = false;
+
+    /*public float MaxDistance
     {
         get
         {
             return this.maxDistance;
         }
-    }
+    }*/
 
     // Use this for initialization
     void Awake ()
     {
         sat = transform.Find("SatelliteSprite").transform;
+        sat.Find("Cone").gameObject.SetActive(false);
         StartCoroutine(Rise());
-        //distance = sat.position.y;
+        //
 	}
 
     private IEnumerator Rise()
     {
-        /*iTween.MoveAdd(sat.gameObject, transform.forward * (minDistance + 2), 5f);
-        yield return new WaitForSeconds(5);
-        sat.GetComponent<CircleCollider2D>().enabled = true;*/
+        sat.transform.localPosition = Vector3.zero;
+        iTween.MoveAdd(sat.gameObject, Vector3.up * distance, 4f);
+        yield return new WaitForSeconds(4);
+
+        sat.GetComponent<CircleCollider2D>().enabled = true;
+        distance = sat.position.y;
+        controlable = true;
+        sat.Find("Cone").gameObject.SetActive(true);
         yield return null;
     }
 
@@ -58,6 +66,9 @@ public class Satellite : MonoBehaviour {
             //explode();
             return;
         }
+
+        if (!controlable)
+            return;
 
         float revenues = 0;
         List<Zone> zones = sc.zones;
@@ -134,8 +145,10 @@ public class Satellite : MonoBehaviour {
 
     public void Move(Vector2 move)
     {
+        if (!controlable)
+            return;
         //*
-        this.distance = sat.position.magnitude + move.y;
+        this.distance = sat.localPosition.y + move.y * Time.deltaTime * speedY;
         /*
         if (lost && distance < 50)
         {
@@ -147,7 +160,7 @@ public class Satellite : MonoBehaviour {
         //*/
         if (move.y != 0)
         {
-            if (this.distance >= maxDistance)
+            if (this.distance >= maxDistance && !lost)
                 looseSatellite();
             else if (this.distance <= minDistance)
                 explode();
