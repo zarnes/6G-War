@@ -76,7 +76,7 @@ public class ContractController : MonoBehaviour {
         }
 
         inContract = true;
-        sc.canvasController.UpdateContract(type);
+        sc.canvasController.UpdateContract(type, power);
     }
 
     public bool CheckContract(bool display = true)
@@ -112,8 +112,7 @@ public class ContractController : MonoBehaviour {
                 Debug.LogError("Unknown contract type");
                 return false;
         }
-
-        // TODO test if one of the scores is 100
+        
         if (scores.Exists(i => i == 100))
         {
             inContract = false;

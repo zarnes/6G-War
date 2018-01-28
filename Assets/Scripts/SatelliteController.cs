@@ -12,41 +12,25 @@ public class SatelliteController : MonoBehaviour {
 
     public CanvasController canvasController;
     public ContractController contractController;
+    private Transform satellitesTf;
 
     public List<Sprite> wingsSprites;
     public List<Sprite> bodySprites;
-
+    
+    public GameObject satellitePrefab;
     public int maxDistance = 13;
     public int lostDistance = 30;
+    
+        // Generates sats and zones here
+    private System.Random rnd;
 
     // Use this for initialization
-    public void Init() {
-        // Generates sats and zones here
-
-        zones = new List<Zone>();
-        foreach (Transform tfZone in GameObject.Find("Zones").transform)
-        {
-            zones.Add(tfZone.GetComponent<Zone>());
-        }
-
-        players = new List<Player>();
-
-        Player pl = new Player(1, zones);
-        pl.color = new Color(255, 0, 0, 0.37f);
-        pl.bodySprite = bodySprites[pl.id];
-        pl.wingsSprite = wingsSprites[pl.id];
-        players.Add(pl);
-
-        pl = new Player(2, zones);
-        pl.color = new Color(0, 255, 0, 0.37f);
-        pl.bodySprite = bodySprites[pl.id];
-        pl.wingsSprite = wingsSprites[pl.id];
-        players.Add(pl);
-        pl = new Player(3, zones);
-        pl.color = new Color(0, 0, 255, 0.37f);
-        pl.bodySprite = bodySprites[pl.id];
-        pl.wingsSprite = wingsSprites[pl.id];
-        players.Add(pl);
+    public void Init()
+    {
+        satellitesTf = GameObject.Find("Earth").transform.Find("Satellites");
+        rnd = new System.Random();
+        /*players = new List<Player>();
+        
         //pl = new Player(4, zones);
         //players.Add(pl);
 
@@ -57,7 +41,7 @@ public class SatelliteController : MonoBehaviour {
 
             // placeholder
             /*sat.player = players[0];
-            players[0].sats.Add(sat);*/
+            players[0].sats.Add(sat);
         }
 
         //placeholder
@@ -65,7 +49,7 @@ public class SatelliteController : MonoBehaviour {
         players[0].addSat(sats[1]);
         players[0].addSat(sats[3]);
         players[1].addSat(sats[2]);
-        players[2].addSat(sats[4]);
+        players[2].addSat(sats[4]);*/
         //players[3].addSat(sats[5]);
     }
 
@@ -92,6 +76,88 @@ public class SatelliteController : MonoBehaviour {
 
             yield return new WaitForSeconds(1);
         }
+    }
+
+    public void SpawnSatellite(Player player)
+    {
+        /*LayerMask mask = LayerMask.GetMask("Satellite");
+        float i = 0;
+        
+        while (true)
+        {
+            float x = Mathf.Cos(i);
+            float y = Mathf.Sin(i);
+
+            Vector2 direction = new Vector2(x, y);
+            direction = direction.normalized;
+
+            Debug.DrawRay(satellitesTf.position, direction * 11, Color.blue, 20);
+            RaycastHit2D hit = Physics2D.Raycast(satellitesTf.position, direction * 11, 1, mask);
+            if (hit.transform == null)
+            {
+                Transform satelliteTf = Instantiate(satellitePrefab, satellitesTf).transform;
+                Satellite sat = satelliteTf.GetComponent<Satellite>();
+                //Debug.Log(i);
+
+                sat.transform.localRotation = Quaternion.Euler(0, 0, i);
+
+                player.addSat(satelliteTf.GetComponent<Satellite>());
+                sats.Add(sat);
+                sat.sc = this;
+                break;
+            }
+
+            i += 10;
+
+            if (i > 630)
+                break;
+        }*/
+
+        float placingAngle;
+
+        if (sats.Count == 0)
+        {
+            placingAngle = 0;
+        }
+        else
+        {
+            List<float> angles = new List<float>();
+            foreach (Satellite sat in sats)
+            {
+                angles.Add(sat.transform.localEulerAngles.z);
+            }
+
+            angles.Sort((a1, a2) => a1.CompareTo(a2));
+
+            int indexBetterPlacement = 0;
+            float spaceBetterPlacement = 0;
+
+            for (int i = 1; i < angles.Count; ++i)
+            {
+                float space = angles[i] - angles[i - 1];
+
+                if (space > spaceBetterPlacement)
+                {
+                    indexBetterPlacement = i - 1;
+                    spaceBetterPlacement = space;
+                }
+            }
+
+            // if only 1 other satellite
+            if (spaceBetterPlacement == 0)
+                placingAngle = 300;
+            else
+                placingAngle = angles[indexBetterPlacement] + (spaceBetterPlacement / 2);
+        }
+
+        Transform satelliteTf = Instantiate(satellitePrefab, satellitesTf).transform;
+        satelliteTf.localEulerAngles = new Vector3(0, 0, placingAngle);
+        Satellite newSat = satelliteTf.GetComponent<Satellite>();
+
+        player.addSat(satelliteTf.GetComponent<Satellite>());
+        sats.Add(newSat);
+        newSat.sc = this;
+
     }
 
 	// Update is called once per frame
@@ -144,6 +210,20 @@ public class SatelliteController : MonoBehaviour {
                 player.SwitchSatellite(false);
             else if (switchSat == 0 && player.switchLock)
                 player.switchLock = false;
+
+
+            // A button
+            float a = Input.GetAxis("A" + i);
+            if (a > 0.5f && !player.buyFlag)
+            {
+                Debug.Log(player.id + " buying");
+                player.buyFlag = true;
+                // add money condition
+            }
+            else if (a < 0.5f && player.buyFlag)
+            {
+                player.buyFlag = false;
+            }
         }
     }
 }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Zone
   - Satellite
+  - PlayerController
   layers:
   - Default
   - TransparentFX
