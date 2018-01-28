@@ -16,6 +16,9 @@ public class SatelliteController : MonoBehaviour {
     public List<Sprite> wingsSprites;
     public List<Sprite> bodySprites;
 
+    public int maxDistance = 13;
+    public int lostDistance = 30;
+
     // Use this for initialization
     public void Init() {
         // Generates sats and zones here
@@ -124,8 +127,8 @@ public class SatelliteController : MonoBehaviour {
             {
                 if (player.sats[j].lost == true)
                 {
-                    player.sats[player.currentSat].Move(new Vector2(0, -10));
-                    if (player.sats[player.currentSat].distance > player.sats[player.currentSat].MaxDistance)
+                    player.sats[player.currentSat].Move(new Vector2(0, -5));
+                    if (player.sats[player.currentSat].distance > this.lostDistance)
                     {
                         player.satDestroyed(player.sats[player.currentSat]);
                     }

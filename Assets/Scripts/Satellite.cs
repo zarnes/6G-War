@@ -18,8 +18,8 @@ public class Satellite : MonoBehaviour {
     public float rayWidth = 0.2f;
 
     public float distance;
-    private float minDistance = 5;
-    private float maxDistance = 15;
+    private float minDistance = 7.5f;
+    private float maxDistance = 13;
 
     [Range(0, 15)]
     public float speedX = 8f;
@@ -158,6 +158,11 @@ public class Satellite : MonoBehaviour {
     public void looseSatellite()
     {
         this.lost = true;
+        Vector2 scale = new Vector2(0, this.sat.position.y);
+        Vector2 position = new Vector2(0, - scale.y / 2);
+        Transform cone = this.sat.Find("Cone").transform;
+        cone.position = position;
+        cone.localScale = scale;
     }
     
 
