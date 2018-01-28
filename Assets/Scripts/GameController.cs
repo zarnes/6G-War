@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour {
     public SatelliteController satelliteController;
     public CanvasController canvasController;
     public ContractController contractController;
+    public MeteoriteController meteoriteController;
 
     // Use this for initialization
     void Start ()
@@ -15,6 +16,7 @@ public class GameController : MonoBehaviour {
         earthController.Init();
         satelliteController.Init();
         canvasController.Init();
+        meteoriteController.Init();
 
         contractController.sc = satelliteController;
         contractController.CreateContract();
