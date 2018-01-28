@@ -82,4 +82,20 @@ public class CanvasController : MonoBehaviour
             playerCompletionValue[i].text = scores[i].ToString();
         }
     }
+
+    public IEnumerator WinContract(ContractController contractController)
+    {
+        contractName.text = "Contrat remporté !";
+        yield return new WaitForSeconds(5);
+        contractController.CreateContract();
+    }
+
+    public IEnumerator PlayerWin(int playerIndex)
+    {
+        playerCompletionSprite[playerIndex].fillAmount = 1;
+        playerCompletionValue[playerIndex].text = "OK!";
+
+        iTween.ShakePosition(playerCompletionSprite[playerIndex].transform.parent.gameObject, new Vector3(7, 7, 7), 5);
+        yield return null;
+    }
 }

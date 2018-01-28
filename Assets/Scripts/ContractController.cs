@@ -15,6 +15,8 @@ public class ContractController : MonoBehaviour {
     private List<Zone> zones;
     private int power;
 
+    public bool inContract = false;
+
     public void CreateContract()
     {
         if (rd == null)
@@ -58,11 +60,30 @@ public class ContractController : MonoBehaviour {
         if (CheckContract(false))
             CreateContract();
 
+        // Hide old particles
+        foreach (Zone zone in sc.zones)
+        {
+            zone.tf.GetComponent<ParticleSystem>().Stop();
+        }
+
+        // activate particles for contract zones
+        if (type == ContractType.bateaux || type == ContractType.couverture || type == ContractType.urbanisme)
+        {
+            foreach (Zone zone in zones)
+            {
+                zone.tf.GetComponent<ParticleSystem>().Play();
+            }
+        }
+
+        inContract = true;
         sc.canvasController.UpdateContract(type);
     }
 
     public bool CheckContract(bool display = true)
     {
+        if (!inContract)
+            return false;
+
         List<int> scores;
         switch(type)
         {
@@ -95,29 +116,34 @@ public class ContractController : MonoBehaviour {
         // TODO test if one of the scores is 100
         if (scores.Exists(i => i == 100))
         {
-            foreach (Zone zone in zones)
-            {
-                zone.tf.GetComponent<ParticleSystem>().Stop();
-            }
-        }
+            inContract = false;
 
-        // activate particles for contract zones
-        if (type == ContractType.bateaux || type == ContractType.couverture || type == ContractType.urbanisme)
-        {
-            foreach(Zone zone in zones)
+            if (!display)
+                return true;
+
+            StartCoroutine(sc.canvasController.WinContract(this));
+            
+            for (int i = 0; i < scores.Count; ++i)
             {
-                zone.tf.GetComponent<ParticleSystem>().Play();
+                if (scores[i] == 100)
+                {
+                    sc.players[i].points++;
+                    StartCoroutine(sc.canvasController.PlayerWin(i));
+                }
             }
+
+            return true;
         }
 
         /*int[] scoresA = { debugFill, debugFill, debugFill, debugFill };
         scores = new List<int>(scoresA);*/
-
-        if (display)
-            sc.canvasController.UpdateContractScores(scores);
+        
+        sc.canvasController.UpdateContractScores(scores);
 
         return false;
     }
+
+    
 
     public List<int> CalculateBanzai()
     {
