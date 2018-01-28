@@ -10,12 +10,20 @@ public class SatelliteBehavior : MonoBehaviour {
         if (other.gameObject.name == "SatelliteSprite")
         {
             Satellite otherParent = other.gameObject.transform.parent.GetComponent<Satellite>();
-            otherParent.explode();
-            parent.explode();
+            if (! otherParent.exploded)
+            {
+                otherParent.explode();
+            }
+            if (! parent.exploded)
+            {
+                parent.explode();
+            }
         } else if (other.gameObject.name == "Zone Sprite")
         {
             parent.explode();
+        } else
+        {
+            Debug.Log(other.gameObject.name);
         }
-        Debug.Log(other.gameObject.name);
     }
 }

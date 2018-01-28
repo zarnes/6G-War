@@ -163,6 +163,7 @@ public class Satellite : MonoBehaviour {
         this.exploded = true;
         this.sat.Find("Wings").GetComponent<SpriteRenderer>().sprite = this.explodeSprite;
         this.player.satDestroyed(this);
+        this.sc.sats.Remove(this);
         Destroy(gameObject);
     }
 

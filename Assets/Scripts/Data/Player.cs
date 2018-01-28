@@ -71,14 +71,15 @@ public class Player
 
     public void satDestroyed(Satellite sat)
     {
+        this.SwitchSatellite(false);
         this.sats.Remove(sat);
-        if (this.sats.Count() == 0)
+        if (this.sats.Count == 0)
         {
             this.lost = true;
         }
-        else
+        if (this.currentSat == this.sats.Count)
         {
-            this.SwitchSatellite();
+            this.currentSat--;
         }
     }
 }

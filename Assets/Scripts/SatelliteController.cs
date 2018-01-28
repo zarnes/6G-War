@@ -32,8 +32,8 @@ public class SatelliteController : MonoBehaviour {
         players.Add(pl);
         pl = new Player(3, zones);
         players.Add(pl);
-        pl = new Player(4, zones);
-        players.Add(pl);
+        //pl = new Player(4, zones);
+        //players.Add(pl);
 
         sats = new List<Satellite>(FindObjectsOfType<Satellite>());
         foreach (Satellite sat in sats)
@@ -51,7 +51,7 @@ public class SatelliteController : MonoBehaviour {
         players[0].addSat(sats[3]);
         players[1].addSat(sats[2]);
         players[2].addSat(sats[4]);
-        players[3].addSat(sats[5]);
+        //players[3].addSat(sats[5]);
     }
 
     public IEnumerator CalculateZones()
