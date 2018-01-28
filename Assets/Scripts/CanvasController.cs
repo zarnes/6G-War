@@ -51,25 +51,25 @@ public class CanvasController : MonoBehaviour
         switch (type)
         {
             case ContractType.banzai:
-                contractName.text = "Banzaï ! Détruire " + level + " de vos satellites";
+                contractName.text = "Banzaï ! Détruire " + level.ToString() + " de vos satellites";
                 return;
             case ContractType.bateaux:
-                contractName.text = "Réseau maritime niveau " + level;
+                contractName.text = "Réseau maritime niveau " + level.ToString();
                 return;
             case ContractType.couverture:
-                contractName.text = "Couverture privilégiée niveau " + level;
+                contractName.text = "Couverture privilégiée niveau " + level.ToString();
                 return;
             case ContractType.danger:
                 contractName.text = "Vents solaires. Baissez vos orbites";
                 return;
             case ContractType.espionnage:
-                contractName.text = "Espionnez " + level + " satellite" + (level == 1 ? "" : "s") + " ennemi" + (level == 1 ? "" : "s");
+                contractName.text = "Espionnez " + level.ToString() + " satellite" + (level == 1 ? "" : "s") + " ennemi" + (level == 1 ? "" : "s");
                 return;
             case ContractType.social:
-                contractName.text = "Plan social. Sacrifiez " + level + " satellite" + (level == 1 ? "" : "s");
+                contractName.text = "Plan social. Sacrifiez " + level.ToString() + " satellite" + (level == 1 ? "" : "s");
                 return;
             case ContractType.urbanisme:
-                contractName.text = "Urbanisme niveau " + level;
+                contractName.text = "Urbanisme niveau " + level.ToString();
                 return;
         }
     }
