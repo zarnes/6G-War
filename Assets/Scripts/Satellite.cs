@@ -53,12 +53,6 @@ public class Satellite : MonoBehaviour {
         sat.Find("Wings").GetComponent<SpriteRenderer>().sprite = this.wingsSprite;
     }
 
-    private void Update()
-    {
-        /*Debug.DrawRay(sat.position, sat.TransformDirection(new Vector2(rayWidth, -1) * range), color, Time.deltaTime);
-        Debug.DrawRay(sat.position, sat.TransformDirection(new Vector2(-rayWidth, -1) * range), color, Time.deltaTime);*/
-    }
-
     public void CalculateRevenue()
     {
         float revenues = 0;
@@ -69,7 +63,9 @@ public class Satellite : MonoBehaviour {
 
         Vector2 dir = sat.TransformDirection(new Vector2(-rayWidth, -1) * range);
         Debug.DrawRay(sat.position, dir, color, 1);
-        RaycastHit2D hit = Physics2D.Raycast(sat.position, dir);
+        LayerMask mask = LayerMask.GetMask("Default");
+        RaycastHit2D hit = Physics2D.Raycast(sat.position, dir, range, mask);
+
         if (hit.transform != null)
         {
             firstZone = hit.transform.parent.GetComponent<Zone>();
@@ -77,7 +73,7 @@ public class Satellite : MonoBehaviour {
 
         dir = sat.TransformDirection(new Vector2(rayWidth, -1) * range);
         Debug.DrawRay(sat.position, dir, color, 1);
-        hit = Physics2D.Raycast(sat.position, dir, range);
+        hit = Physics2D.Raycast(sat.position, dir, range, mask);
         if (hit.transform != null)
         {
             lastZone = hit.transform.parent.GetComponent<Zone>();
@@ -98,7 +94,7 @@ public class Satellite : MonoBehaviour {
             dir = currentZone.tf.position - sat.position;
             Debug.DrawRay(start, dir, Color.red, 1);
 
-            hit = Physics2D.Raycast(start, dir);
+            hit = Physics2D.Raycast(start, dir, range, mask);
             if (hit.transform != null && hit.transform.parent.tag == "Zone")
             {
                 Zone zone = hit.transform.parent.GetComponent<Zone>();

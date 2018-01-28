@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 58576052230864982}
   - component: {fileID: 114546868601424140}
   - component: {fileID: 50290709284036976}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SatelliteSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4273940372323062}
   - component: {fileID: 212994637337034938}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4390013924272726}
   - component: {fileID: 114628890757589032}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Satellite
   m_TagString: Satellite
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4318735996199566}
   - component: {fileID: 212676199436330354}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
