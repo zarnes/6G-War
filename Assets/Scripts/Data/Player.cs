@@ -13,6 +13,9 @@ public class Player
     public List<Satellite> sats;
     public int currentSat;
     public bool switchLock;
+    public Color color;
+    public Sprite bodySprite;
+    public Sprite wingsSprite;
 
     public bool lost = false;
 
@@ -63,9 +66,7 @@ public class Player
     public void addSat(Satellite sat)
     {
         sat.player = this;
-        sat.bodySprite = sat.bodySprites[this.id];
-        sat.wingsSprite = sat.wingsSprites[this.id];
-        sat.Init();
+        sat.setSkin(this.bodySprite, this.wingsSprite, this.color);
         this.sats.Add(sat);
     }
 
