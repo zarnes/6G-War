@@ -227,7 +227,7 @@ public class ContractController : MonoBehaviour {
 
         // main condictions for contract
         zones.Add(sc.zones[startingZoneIndex]);
-        power = rd.Next(3) + 1;
+        power = rd.Next(2) + 1;
 
         while (size > 0)
         {

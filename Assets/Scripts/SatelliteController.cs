@@ -60,6 +60,24 @@ public class SatelliteController : MonoBehaviour {
     {
         while (true)
         {
+            int lost = 0;
+            foreach(Player pl in players)
+            {
+                if (pl.points == 10)
+                {
+                    StartCoroutine(canvasController.FinalWin(pl.id - 1));
+                }
+
+                if (pl.lost)
+                    ++lost;
+            }
+
+            if (lost == players.Count)
+            {
+                StartCoroutine(canvasController.FinalLose());
+                break;
+            }
+
             foreach (Zone zone in zones)
             {
                 zone.visitedThisFrame = new Dictionary<int, int>();
@@ -83,39 +101,6 @@ public class SatelliteController : MonoBehaviour {
 
     public void SpawnSatellite(Player player)
     {
-        /*LayerMask mask = LayerMask.GetMask("Satellite");
-        float i = 0;
-        
-        while (true)
-        {
-            float x = Mathf.Cos(i);
-            float y = Mathf.Sin(i);
-
-            Vector2 direction = new Vector2(x, y);
-            direction = direction.normalized;
-
-            Debug.DrawRay(satellitesTf.position, direction * 11, Color.blue, 20);
-            RaycastHit2D hit = Physics2D.Raycast(satellitesTf.position, direction * 11, 1, mask);
-            if (hit.transform == null)
-            {
-                Transform satelliteTf = Instantiate(satellitePrefab, satellitesTf).transform;
-                Satellite sat = satelliteTf.GetComponent<Satellite>();
-                //Debug.Log(i);
-
-                sat.transform.localRotation = Quaternion.Euler(0, 0, i);
-
-                player.addSat(satelliteTf.GetComponent<Satellite>());
-                sats.Add(sat);
-                sat.sc = this;
-                break;
-            }
-
-            i += 10;
-
-            if (i > 630)
-                break;
-        }*/
-
         float placingAngle;
 
         if (sats.Count == 0)
@@ -228,6 +213,7 @@ public class SatelliteController : MonoBehaviour {
                     player.satellitesBought++;
                     SpawnSatellite(player);
                     canvasController.UpdateMoney(players);
+                    canvasController.UpdatePrice(player.id - 1, (int)(player.satellitesBought * satPrice * multiplier));
                 }
             }
             else if (a < 0.1f && player.buyFlag)

@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour {
     public CanvasController canvasController;
     public ContractController contractController;
     public MeteoriteController meteoriteController;
+    public PlayerController playerController;
 
     // Use this for initialization
     void Start ()
@@ -19,6 +20,8 @@ public class GameController : MonoBehaviour {
             SceneManager.LoadScene("MainMenu");
             return;
         }
+
+        playerController = GameObject.FindGameObjectWithTag("PlayerController").GetComponent<PlayerController>();
 
         earthController.Init();
 
@@ -32,6 +35,16 @@ public class GameController : MonoBehaviour {
 
         satelliteController.Init();
         canvasController.Init();
+
+        List<Sprite> cores = new List<Sprite>();
+        List<Sprite> wings = new List<Sprite>();
+        foreach (Player pl in satelliteController.players)
+        {
+            cores.Add(pl.bodySprite);
+            wings.Add(pl.wingsSprite);
+        }
+        canvasController.SetSprites(cores, wings);
+
         //meteoriteController.Init();
         
         /*foreach (Zone zone in zones)
