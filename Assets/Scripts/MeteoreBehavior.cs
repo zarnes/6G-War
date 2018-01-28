@@ -11,6 +11,8 @@ public class MeteoreBehavior : MonoBehaviour {
         if (other.gameObject.name == "Zone Sprite")
         {
             parent.destroy();
+            Zone otherParent = other.gameObject.transform.parent.GetComponent<Zone>();
+            otherParent.destroy();
         }
     }
 }
